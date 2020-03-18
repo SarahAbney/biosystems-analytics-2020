@@ -48,17 +48,20 @@ def main():
     seq = args.sequences
     lookup = {lines[0:3].upper(): lines[3:].upper().split() for lines in args.codons}
    
-    out_fh = open(args.outfile, 'wt') if args.outfile else sys.stdout
+#    out_fh = open(args.outfile, 'wt') if args.outfile else sys.stdout
+    
+
     for i in range(0,len(args.sequences),3):
         protein_seq = args.sequences.upper()[i:i+3] 
- 
-#        print(protein_seq)
-#        print(lookup) 
-
-        if protein_seq in lookup:
-            print(*lookup[protein_seq], end = "")
-        else: 
-            print('-', end = "")
+        print(protein_seq)
+        print(lookup) 
+        for protein_seq in lookup:
+            answers = lookup.get(protein_seq,"-")
+    print(*answers) 
+#        if protein_seq in lookup:
+#            print(*lookup[protein_seq], end = "")
+#        else: 
+#            print('-', end = "")
                # print(protein_seq)
        # else: 
         #    print('-')
@@ -77,8 +80,8 @@ def main():
        # else:
         #    print(f'-')
             
-        out_fh.write() 
-    out_fh.close() 
+#        out_fh.write() 
+#    out_fh.close() 
     
 
 
