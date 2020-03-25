@@ -21,7 +21,7 @@ def get_args():
     parser.add_argument(
         'file',
         metavar='FILE',
-        nargs='+',
+        nargs='*',
         type=argparse.FileType('r'),
         help='Input file(s)')
 
@@ -43,13 +43,26 @@ def main():
     args = get_args()
     dna = args.file
     out = args.outdir
-    rna = ['U' if char == 'T' else char for char in dna]
+    total_lines = 0
+    
+    for fh in dna:
+        lines = 0
+        out_file = os.path.join(out_dir, os.path.basename(fh.name)
+        out_fh = open(out_file, 'wt')
+        
+        total_files = len(out)
 
-    #    for fh in args.file:
-    #        out_file = os.path.join(out_dir, os.path.basename(fh.name)
-    #        out_fh = open(out_file, 'wt')
-    for line in dna:
-        print(rna)
+        for line in fh:
+            lines += 1
+            rna = ['U' if char == 'T' else char for char in dna]
+
+        total_lines += lines
+
+        out_fh.write(rna + '\n')
+
+        print(
+            'Done, wrote {total_lines} sequences in {total_files} file into directory "out".'
+        )
 
 
 # --------------------------------------------------
