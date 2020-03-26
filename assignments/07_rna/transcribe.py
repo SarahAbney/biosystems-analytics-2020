@@ -43,7 +43,7 @@ def main():
     out_dir = args.outdir
     total_seq = 0
     total_files = 0
-    listToStr = ''
+
 
     
     for fh in args.file:
@@ -54,19 +54,22 @@ def main():
 
 
         out_fh = open(out_file, 'wt')
+       
 
         total_files = len(os.listdir(out_dir))
         more = 's' if total_files > 1 else ''        
-        
+        listToStr = '' 
+
         for line in fh:
             lines += 1 
             rna = ['U' if char == 'T' else char for char in line] 
-            listToStr += ''.join(map(str, rna)) 
+#            listToStr += ''.join(map(str, rna)) 
+            listToStr += ''.join(rna)
 
         total_seq += lines
         plural = 's' if total_seq > 1 else ''
         
-        out_fh.write(listToStr + '\n') 
+        out_fh.write(listToStr) 
         out_fh.close()
 
  
