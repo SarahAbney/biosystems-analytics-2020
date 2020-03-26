@@ -43,8 +43,7 @@ def main():
     out_dir = args.outdir
     total_seq = 0
     total_files = 0
-
-#    more = 's' if total_files > 1 else ''
+    listToStr = ''
 
     
     for fh in args.file:
@@ -52,26 +51,25 @@ def main():
         out_file = os.path.join(out_dir, os.path.basename(fh.name))
         if not os.path.isdir(out_dir):
             os.makedirs(out_dir)
+
+
         out_fh = open(out_file, 'wt')
-    if os.path.isfile(out_file):
-        out_file = open(out_file).read().rstrip() 
 
-        more = 's' if total_files > 1 else ''
         total_files = len(os.listdir(out_dir))
-
- 
+        more = 's' if total_files > 1 else ''        
+        
         for line in fh:
-            lines += 1
+            lines += 1 
             rna = ['U' if char == 'T' else char for char in line] 
-            listToStr = ''.join(map(str, rna))
-            plural = 's' if total_seq > 1 else ''
+            listToStr += ''.join(map(str, rna)) 
+
         total_seq += lines
         plural = 's' if total_seq > 1 else ''
-
-
-        out_fh.write(listToStr)
+        
+        out_fh.write(listToStr + '\n') 
         out_fh.close()
-    
+
+ 
 
         
          
