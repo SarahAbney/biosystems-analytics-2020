@@ -31,7 +31,7 @@ def get_args():
                         help='DNA or RNA',
                         metavar='str',
                         type=str,
-                        choices=['rna', 'dna'],
+                        choices=['dna', 'rna'],
                         default='dna')
 
     parser.add_argument('-n',
@@ -96,7 +96,7 @@ def main():
     
     out_fh.close()
 
-    print(f'Done, wrote {args.numseqs} {args.seqtype} sequences to "{args.outfile}".')
+    print(f'Done, wrote {args.numseqs} {args.seqtype.upper()} sequences to "{args.outfile}".')
 
 
 # --------------------------------------------------
