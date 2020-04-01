@@ -31,7 +31,7 @@ def get_args():
                         help='DNA or RNA',
                         metavar='str',
                         type=str,
-                        choices=['rna', 'dna'],
+                        choices=['dna', 'rna'],
                         default='dna')
 
     parser.add_argument('-n',
