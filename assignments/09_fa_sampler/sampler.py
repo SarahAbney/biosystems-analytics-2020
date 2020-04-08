@@ -64,34 +64,36 @@ def main():
     out_dir = args.outdir
     fasta = args.file 
     seq_total = 0
-#    rec = []
 
-    seqs = 0 
+
+#    seqs = 0 
     fh_total = 0
     for fh in args.file:
-        out_file = os.path.join(out_dir, os.path.basename(fh.name))
+        seqs = 0
+        basename = os.path.basename(fh.name)
+        out_file = os.path.join(out_dir, basename)
         if not os.path.isdir(out_dir):
             os.makedirs(out_dir)
         fh_total += 1         
-        print(f'  {fh_total}: {fh.name}')
+        print(f'  {fh_total}: {basename}')
 
         total_files = len(args.file)
         more = 's' if total_files > 1 else ''
             
         out_fh = open(out_file, 'wt')
-        rec = []
-        for rec in SeqIO.parse(fh, 'fasta'):
-            seqs += 1
-            num_pick = round(len(rec) * args.pct)
-            if random.sample(list(rec), num_pick): 
+
+        for rec in SeqIO.parse(fh, 'fasta'): 
+            if random.random() <= args.pct: 
                 SeqIO.write(rec, out_fh, 'fasta')
+                seqs += 1
 
         seq_total += seqs
         plural = 's' if seq_total > 1 else ''
 
         out_fh.close() 
+        
 
-    print(f'Wrote {seq_total} sequence{plural} from {fh_total} file{more} to directory "{args.outdir}"')
+    print(f'Wrote {seq_total:,d} sequence{plural} from {fh_total} file{more} to directory "{args.outdir}"')
 
 # --------------------------------------------------
 if __name__ == '__main__':
