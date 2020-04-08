@@ -63,24 +63,32 @@ def main():
     random.seed(args.seed)
     out_dir = args.outdir
     fasta = args.file 
+    seq_total = 0
 
+    seqs = 0 
     fh_total = 0
     for fh in args.file:
         out_file = os.path.join(out_dir, os.path.basename(fh.name))
         if not os.path.isdir(out_dir):
             os.makedirs(out_dir)
-    fh_total += 1         
-    print(f'{fh_total}: {args.file.name}')
+        fh_total += 1         
+        print(f'  {fh_total}: {fh.name}')
 
-    out_fh = open(out_file, 'wt')
-    for rec in SeqIO.parse(fh, 'fasta'):
-        if random.random() <= args.pct: 
-           SeqIO.write(rec, out_fh, 'fasta')
+        total_files = len(args.file)
+        more = 's' if total_files > 1 else ''
+            
+        out_fh = open(out_file, 'wt')
+        for rec in SeqIO.parse(fh, 'fasta'):
+            seqs += 1
+            if random.sample(rec, k=args.pct): 
+                SeqIO.write(rec, out_fh, 'fasta')
 
-    out_fh.close() 
+        seq_total += seqs
+        plural = 's' if seq_total > 1 else ''
 
-#    print('Hello')
-#   print(f'Wrote xxx sequences from {xx} to directory "{args.outdir}")
+        out_fh.close() 
+
+    print(f'Wrote {seq_total} sequence{plural} from {fh_total} file{more} to directory "{args.outdir}"')
 
 # --------------------------------------------------
 if __name__ == '__main__':
