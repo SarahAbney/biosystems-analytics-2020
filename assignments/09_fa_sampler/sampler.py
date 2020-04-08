@@ -64,6 +64,7 @@ def main():
     out_dir = args.outdir
     fasta = args.file 
     seq_total = 0
+#    rec = []
 
     seqs = 0 
     fh_total = 0
@@ -78,9 +79,11 @@ def main():
         more = 's' if total_files > 1 else ''
             
         out_fh = open(out_file, 'wt')
+        rec = []
         for rec in SeqIO.parse(fh, 'fasta'):
             seqs += 1
-            if random.sample(rec, k=args.pct): 
+            num_pick = round(len(rec) * args.pct)
+            if random.sample(list(rec), num_pick): 
                 SeqIO.write(rec, out_fh, 'fasta')
 
         seq_total += seqs
