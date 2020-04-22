@@ -26,7 +26,7 @@ Because casinos have caught onto the art of counting cards, more than one deck i
 For this program we will need:
 
 * An arguement called ''-d | --decks''. The default value will be [red]#4# as this is the casino standard (don't ask me how I know this...) 
-* Our program to accept the cards that were dealt, 2 for the player([green]#P#) and 1 for the dealer([red]#D#) in a string like ''[green]#PP#[red]#D#''
+* Our program to accept the cards that were dealt, 2 for the player([green]#P#) and 1 for the dealer([red]#D#) in a string like '[green]#PP#[red]#D#'
 
 Now what do you even do with all these numbers? Well true count can help you determine how much to bet as you play the game. This is determined by using betting units, for simplicity sake this will be an optional arguement '-b | --betunit' with a default of 50 (this can represent any currency).
 A smart bet is calculated by 'true count' minus '1 betting count' for example: 
