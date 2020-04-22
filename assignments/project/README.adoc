@@ -1,4 +1,3 @@
-[.lead]
 Learning how to count cards in blackjack 
 
 
@@ -10,15 +9,15 @@ Whether you are the former or the latter, in this exercise you will learn how to
 * Set your deck size 
 * Have fun!!!
 
-Start off on the road to winning by creating a program called '''ruby 'casinocounter.py'
+Start off on the road to winning by creating a program called [red]#casinocounter.py#
 
 Since BlackJack is truly dependent on the card you were dealt. Although you cant count chance, you can count probability of winning! The stakes are low in this program as we are removing the aspect of other players. You and the dealer are playing. 
 
 The most popular counting system is the High-Low count, which we use in our code.Meaning that each card will have the following count: 
 
-* High = Cards 10, J, K, Q = count value of -1 = good for the '''green 'player'
-* Low = Cards 2, 3, 4, 5, 6 = count value of +1 = good for the '''ruby 'dealer'
-* Neutral =  Cards 7, 8, 9 = count value of 0 = no good for the '''green 'player'/OR/ '''ruby 'dealer'
+* High = Cards 10, J, K, Q = count value of -1 = good for the [green]#player#
+* Low = Cards 2, 3, 4, 5, 6 = count value of +1 = good for the [red]#dealer#
+* Neutral =  Cards 7, 8, 9 = count value of 0 = no good for the [green]#player# OR [red]#dealer#
 
 To give some context, as HIGH cards are played, and therefore depleated from the deck, player advantage DECREASES. In the same respect, as LOW cards are played, player advantage INCREASES - there are less of these that can hurt you in future deals. 
 
@@ -26,11 +25,11 @@ Because casinos have caught onto the art of counting cards, more than one deck i
 
 For this program we will need:
 
-* An arguement called ''-d | --decks''. The default value will be '''ruby '4' as this is the casino standard (don't ask me how I know this...) 
-* Our program to accept the cards that were dealt, 2 for the player(P) and 1 for the dealer(D) in a string like ''PPD''
+* An arguement called ''-d | --decks''. The default value will be [red]#4# as this is the casino standard (don't ask me how I know this...) 
+* Our program to accept the cards that were dealt, 2 for the player([green]#P#) and 1 for the dealer([red]#D#) in a string like ''[green]#PP#[red]#D#''
 
-Now what do you even do with all these numbers? Well true count can help you determine how much to bet as you play the game. This is determined by using betting units, for simplicity sake this will be an optional arguement ''-b | --betunit'' with a default of 50 (this can represent any currency).
-A smart bet is calculated by ''true count'' minus ''1 betting count'' for example: 
+Now what do you even do with all these numbers? Well true count can help you determine how much to bet as you play the game. This is determined by using betting units, for simplicity sake this will be an optional arguement '-b | --betunit' with a default of 50 (this can represent any currency).
+A smart bet is calculated by 'true count' minus '1 betting count' for example: 
   You have a true count of 3. 
   3-1 = 1 betting unit 
   2 x $50 = $100 should be your bet 
