@@ -51,6 +51,13 @@ For this program we will need:
 * An arguement called `-d | --decks`. The default value will be [red]#*4*# as this is the casino standard (don't ask me how I know this...) 
 * Our program to accept the cards that were dealt, 2 for the player([green]#*P*#) and 1 for the dealer([red]#*D*#) in a string like `PPD`
 
+The player should only be able to play card values. The program should present a usage error if the input is not a valid card value: 
+....
+./casinocounter.py DFG
+usage: casinocounter.py [-h] [-d int] [-b int] [-r int] str
+casinocounter.py: error: argument str: invalid choice: 'DFG' (choose from '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K', 'A')
+....
+
 Now what do you even do with all these numbers? Well true count can help you determine how much to bet as you play the game. This is determined by using betting units, for simplicity sake this will be an optional arguement `-b | --betunit` with a default of 50 (this can represent any currency).
 A smart bet is calculated by `true count` minus `1 betting count` for example: 
   You have a true count of 3. 
