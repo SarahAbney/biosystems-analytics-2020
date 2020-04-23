@@ -11,6 +11,25 @@ Whether you are the former or the latter, in this exercise you will learn how to
 
 Start off on the road to winning by creating a program called [red]#*casinocounter.py*#
 
+When you run '-h | --h' on your program you should get the following output: 
+
+'usage: casinocounter.py [-h] [-d int] [-b int] [-r int] str
+
+Counting Cards
+
+positional arguments:
+  str                   Three cards that have been dealt for player(P) and
+                        Dealer(D): PPD
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d int, --decks int   How many decks do you want to start with? (default: 4)
+  -b int, --betunit int
+                        The amount of currency on the betting chip (default:
+                        50)
+  -r int, --runningc int
+                        Running count (default: 0)'
+
 Since BlackJack is truly dependent on the card you were dealt. Although you cant count chance, you can count probability of winning! The stakes are low in this program as we are removing the aspect of other players. You and the dealer are playing. 
 
 The most popular counting system is the High-Low count, which we use in our code.Meaning that each card will have the following count: 
