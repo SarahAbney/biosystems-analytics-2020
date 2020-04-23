@@ -4,10 +4,12 @@
 *"Winner, Winner! Chicken dinner!"* 
 
 Gambling to some is a risk, and to others is a live probability computation. 
-Whether you are the former or the latter, in this exercise you will learn how to: 
- * Count BlackJack deals 
- * Set your deck size 
- * Have fun!!!
+Whether you are the former or the latter. 
+
+.In this exercise you will learn how to: 
+* Count BlackJack deals 
+* Set your deck size 
+* Have fun!!!
 
 Start off on the road to winning by creating a program called [red]#*casinocounter.py*#
 
