@@ -30,6 +30,7 @@ def get_args():
                         help='Keyword to take',
                         metavar='keyword',
                         type=str,
+                        nargs='+',
                         default=None)
 
     parser.add_argument('-s',
@@ -37,6 +38,7 @@ def get_args():
                         help='Taxa to skip',
                         metavar='[taxa[taxa ...]]',
                         type=str,
+                        nargs='*',
                         default=None)
 
     parser.add_argument('-o',
@@ -59,27 +61,56 @@ def main():
     """Make a jazz noise here"""
 
     args = get_args()
-    keywords = args.keywords
-    skips = 0 
+   # wanted_kw = set([kw.lower() for kw in args.keyword])
+    wanted_kw = set(map(str.lower, args.keyword))
+    skip_taxa = set(map(str.lower, args.skiptaxa or [])) 
 
-    for rec in SeqIO.parse(args.file, "swiss"): 
-        print(rec)
-    
-    taxonomy = ['Eukaryota', 'Alveolata', 'Apicomplexa', 'Aconoidasida',
-        'Haemosporida', 'Plasmodiidae', 'Plasmodium', 'Plasmodium (Plasmodium)']
+ 
+    skips = 0
+    for rec in SeqIO.parse(args.file, 'swiss'):
+        annots = rec.annotations
+        taxa = annots.get('taxonomy') 
+        if taxa:
+            taxa = set(map(str.lower, taxa))                                         if skip_taxa.intersection(taxa):
+                skips += 1
+                continue
+            
+# print(wanted_kw.intersection(set(rec.annotations.get('keywords')))) 
+"""Easier to pair with higher order functions"""
+        takes = 0     
+        keywords = annots.get('keywords')
+        if keywords: 
+            keywords = set(map(str.lower, keywords))
+            if wanted_kw.intersection(keywords): 
+                takes += 1
+                SeqIO.write(rec, args.outfile, 'fasta')
+            else: 
+                skips += 1
+             
 
-    taxa = set(map(str.lower, taxonomy)) 
-    skip = set(map(str.lower, [args.skip]))
-    sharedvalues = skip.intersection(taxa)
-    skips += 1
+#    taxa = annots.get('taxonomy') 
+#    if taxa: 
+#        taxa = set(map(str.lower, taxa))
+#        if skip_taxa.intersection(taxa):
+#            continue
+
+#        print(rec.annotations.get('taxonomy'))
     
-    takes = 0
-    keywor = [args.keyword] 
-    if skip.intersection(taxa) == None: 
-        keys = set(map(str.lower, keywor))
-        sharedkeys = keywords.intersection(keys)
-        SeqIO.write(res, args.outfile, 'fasta') 
-        takes += 1
+#    taxonomy = ['Eukaryota', 'Alveolata', 'Apicomplexa', 'Aconoidasida',
+#        'Haemosporida', 'Plasmodiidae', 'Plasmodium', 'Plasmodium (Plasmodium)']
+
+#    taxa = set(map(str.lower, taxonomy)) 
+#    skip = set(map(str.lower, [args.skip]))
+#    sharedvalues = skip.intersection(taxa)
+#    skips += 1
+    
+#    takes = 0
+#    keywor = [args.keyword] 
+#    if skip.intersection(taxa) == None: 
+#        keys = set(map(str.lower, keywor))
+#        sharedkeys = keywords.intersection(keys)
+#        SeqIO.write(res, args.outfile, 'fasta') 
+#        takes += 1
 
     print(f'Done, skipped {skips} and took {takes}. See output "{args.outfile.name}"') 
 # --------------------------------------------------
