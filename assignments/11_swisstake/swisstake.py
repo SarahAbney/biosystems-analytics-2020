@@ -20,7 +20,7 @@ def get_args():
         description='Filter SwissProt file for keywords, taxa',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('FILE',
+    parser.add_argument('file',
                         metavar='FILE',
                         type=argparse.FileType('r'),
                         help='SwissProt file')
@@ -64,20 +64,21 @@ def main():
    # wanted_kw = set([kw.lower() for kw in args.keyword])
     wanted_kw = set(map(str.lower, args.keyword))
     skip_taxa = set(map(str.lower, args.skiptaxa or [])) 
-
- 
+    takes = 0
     skips = 0
+
     for rec in SeqIO.parse(args.file, 'swiss'):
         annots = rec.annotations
         taxa = annots.get('taxonomy') 
         if taxa:
-            taxa = set(map(str.lower, taxa))                                         if skip_taxa.intersection(taxa):
+            taxa = set(map(str.lower, taxa))                                         
+            if skip_taxa.intersection(taxa):
                 skips += 1
                 continue
             
-# print(wanted_kw.intersection(set(rec.annotations.get('keywords')))) 
-"""Easier to pair with higher order functions"""
-        takes = 0     
+
+    
+             
         keywords = annots.get('keywords')
         if keywords: 
             keywords = set(map(str.lower, keywords))
@@ -112,7 +113,7 @@ def main():
 #        SeqIO.write(res, args.outfile, 'fasta') 
 #        takes += 1
 
-    print(f'Done, skipped {skips} and took {takes}. See output "{args.outfile.name}"') 
+    print(f'Done, skipped {skips} and took {takes}. See output in "{args.outfile.name}".') 
 # --------------------------------------------------
 if __name__ == '__main__':
     main()
