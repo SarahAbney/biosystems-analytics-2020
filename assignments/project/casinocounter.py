@@ -2,7 +2,7 @@
 """
 Author : seabney
 Date   : 2020-04-22
-Purpose: Win in Vegas
+Purpose: Learn how to count
 """
 
 import argparse
@@ -60,35 +60,35 @@ def main() -> None:
     """Make a jazz noise here""" 
     args = get_args()
     play = args.user_input
-
+    numdecks = args.decks
+    count = args. runningc
+    cards = 0
+    totaldeck = 0
     
     
     cardnum = { '2': 1, '3': 1, '4': 1, '5': 1, '6': 1, '7': 0, '8': 0, '9': 0, 'X' : 0, 'J': -1, 'Q': -1, 'K': -1, 'A': -1 } 
-
-    numdecks = args.decks
-
-    count = args.runningc 
-    cards = 0 
-    totaldecks = 0 
-
-    
-    cards += len(play) 
+     
+    cards += len(play)
     for card in play: 
         count += cardnum[card.upper()]
         totaldecks = cards / 52
         totalcount = count / (numdecks - totaldecks)
+    
     print(f'Count: {count}')
     print(f'True Count: {totalcount}')
-   
+
+
+
     bet = ((totalcount) - 1)*int(args.betunit) 
-    
-    print(f'Decks played: {totaldecks}')
+
+    print(f'Decks played: {totaldecks}') 
 
     if bet < 1: 
         print(f"DON'T RISK IT!! Bet differential too low ... ${bet}")
-    else:
+    else: 
         print(f'Raise bet: ${bet}')
 
+    
 # --------------------------------------------------
 if __name__ == '__main__':
     main()
