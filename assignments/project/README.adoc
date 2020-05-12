@@ -1,12 +1,15 @@
 = Learning how to count cards in BlackJack 
 
+[.text-center]
+*Sarah E. Abney, Biosystems Analytics*
+
 
 *"Winner, Winner! Chicken dinner!"* 
 
 Gambling to some is a risk, and to others is a live probability computation. 
 Whether you are the former or the latter. 
 
-.In this exercise you will learn how to: 
+.In this exercise you will learn how to:
 * Count BlackJack deals 
 * Set your deck size 
 * Have fun!!!
@@ -16,7 +19,7 @@ Start off on the road to winning by creating a program called [red]#*casinocount
 When you run `-h | --h` on your program you should get the following output: 
 
 ....
-usage: casinocounter.py [-h] [-d int] [-b int] [-r int] str
+usage: casinocounter.py [-h] [-d int] [-b int] [-r float] str
 
 Counting Cards
 
@@ -30,7 +33,7 @@ optional arguments:
   -b int, --betunit int
                         The amount of currency on the betting chip (default:
                         50)
-  -r int, --runningc int
+  -r float, --runningc float
                         Running count (default: 0)
 ....
 
@@ -54,8 +57,8 @@ For this program we will need:
 The player should only be able to play card values. The program should present a usage error if the input is not a valid card value: 
 ....
 ./casinocounter.py DFG
-usage: casinocounter.py [-h] [-d int] [-b int] [-r int] str
-casinocounter.py: error: argument str: invalid choice: 'DFG' (choose from '2', '3', '4', '5', '6', '7', '8', '9', 'X', 'J', 'Q', 'K', 'A')
+usage: casinocounter.py [-h] [-d int] [-b int] [-r float] str
+casinocounter.py: error: Bad input: Stop! Are you even playing cards? "DFG" are not valid choices. Choose from "2,3,4,5,6,7,8,9,X,J,Q,K,A".
 ....
 
 Now what do you even do with all these numbers? Well true count can help you determine how much to bet as you play the game. This is determined by using betting units, for simplicity sake this will be an optional arguement `-b | --betunit` with a default of 50 (this can represent any currency).
@@ -66,7 +69,32 @@ A smart bet is calculated by `true count` minus `1 betting count` for example:
 
 We want to win money not lose it! Safe bets are the best bet. 
 
+Want to play for multiple rounds? Make sure to use the running count optional flag `-r | --runningc` with your next hand to keep up with your odds (hint: they increase as you play). Make sure that this flag allows for decimals as well!
+
 Try it out and see how your program goes. Maybe try it out in the casino to double down on the code in a real life trial. 
+
+When you're ready to gamble run make test. *Real winners* should see: 
+
+....
+$ make test
+pytest -xv test.py
+============================== test session starts ==============================
+platform linux -- Python 3.6.9, pytest-5.3.5, py-1.8.1, pluggy-0.13.1 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /mnt/c/Users/snare/documents/biosystems-analytics-2020/assignments/project
+collected 7 items
+
+test.py::test_exists PASSED                                               [ 14%]
+test.py::test_usage PASSED                                                [ 28%]
+test.py::test_bad_string PASSED                                           [ 42%]
+test.py::test_input1_238 PASSED                                           [ 57%]
+test.py::test_input2_2JK PASSED                                           [ 71%]
+test.py::test_input3_runningcflag PASSED                                  [ 85%]
+test.py::test_input4_runningcflagD PASSED                                 [100%]
+
+=============================== 7 passed in 1.03s ===============================
+....
+
   
 
 
